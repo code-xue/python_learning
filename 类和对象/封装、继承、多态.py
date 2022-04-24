@@ -66,3 +66,33 @@ class B(object):
     pass
 class C(A,B):
     pass
+
+#object类：是所有类的父类。所有类中都有object类中的方法
+#不写继承时默认继承object类
+
+#**************************************************多态******************************************
+#就是“具有多种形态”，即使不知道一个变量所引用的对象是什么类型，仍然可以通过这个变量调用方法，
+#在运行过程中根据变量所引用的对象的类型，动态决定调用哪个对象中的方法。
+
+class Animal:
+    def eat(self):
+        print("动物吃肉")
+class Dog(Animal):
+    def eat(self):
+        print("狗吃骨头")
+class Cat(Animal):
+    def eat(self):
+        print("猫吃鱼")
+class Person:
+    def eat(self):
+        print("人吃五谷杂粮")
+
+def fun(obj):
+    obj.eat()
+
+fun(Animal())
+fun(Dog())
+fun(Cat())
+fun(Person())
+
+#pyhton是一门动态语言，崇尚“鸭子类型”，多态不要求继承关系，只看类中有无对应的方法。
