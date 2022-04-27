@@ -208,7 +208,37 @@ def modify():
         else:
             break
 def sort():
-    pass
+    show()
+    if os.path.exists(filename):
+        with open(filename,"r",encoding="utf-8") as rfile:
+            student_list=rfile.readlines()
+        student=[]
+        for item in student_list:
+            d=dict(eval(item))
+            student.append(d)
+        asc_or_desc=input("请输入排序方式：0.升序，1.降序")
+        if asc_or_desc=='0':
+            asc_or_desc=False
+        elif asc_or_desc=='1':
+            asc_or_desc=True
+        else:
+            print("输入信息有误，请重新输入")
+            sort()
+        mode=input("请输入排序方式：1.按c语言成绩排序，2.按python成绩排序，3.按java成绩排序，4.按总成绩排序")
+        if mode=="1":
+            student.sort(key=lambda x :int(x["c"]),reverse=asc_or_desc)
+        elif mode=="2":
+            student.sort(key=lambda x :int(x["python"]),reverse=asc_or_desc)
+        elif mode=="3":
+            student.sort(key=lambda x :int(x["java"]),reverse=asc_or_desc)
+        elif mode=="4":
+            student.sort(key=lambda x :int(x["c"])+int(x["python"])+int(x["java"]),reverse=asc_or_desc)
+        else:
+            print("输入的信息有误，请重新输入")
+        show_student(student)
+    else:
+        print("无学生信息")
+        return
 def total():
     if os.path.exists(filename):
         with open(filename,"r",encoding="utf-8") as rfile:
